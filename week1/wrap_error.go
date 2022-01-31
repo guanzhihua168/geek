@@ -8,10 +8,12 @@ import (
 	"log"
 )
 
-func main()  {
+func main() {
 	err := Dao("select * from user where id=1")
-	if err != nil {
-		log.Fatal("get the error:"+err.Error())
+	if errors.Is(err, sql.ErrNoRows) {
+		fmt.Println("not found:" + err.Error())
+	} else if err != nil {
+		log.Fatal("get the error:" + err.Error())
 	}
 
 }
