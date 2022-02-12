@@ -30,12 +30,12 @@ func main() {
 	<-quit
 	log.Println("Shuting down server...")
 
-	if err := g.Wait(); err != nil {
-		log.Fatal(err)
-	}
-
 	if err := s.Shutdown(ctx); err != nil {
 		log.Fatal("Server forced to shutdown:", err)
+	}
+
+	if err := g.Wait(); err != nil {
+		log.Fatal(err)
 	}
 	log.Println("Server exiting")
 
